@@ -13,6 +13,8 @@ BIRD_IMAGE = pygame.image.load('bird1.png')
 bird_x = 50
 bird_y = 300
 bird_y_change = 0
+bird_y_t = 1
+bird_y_a = 10
 
 def display_bird(x, y):
     SCREEN.blit(BIRD_IMAGE, (x, y))
@@ -122,12 +124,15 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 #  if you press spacebar you will move up
-                bird_y_change = -6
+                bird_y_t = 1
+                bird_y_change = 1/2 * -2*bird_y_a * bird_y_t**2
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_SPACE:
                 # when u release space bar you will move down automatically
-                bird_y_change = 3
+                
+                bird_y_change = 1/2 * bird_y_a * bird_y_t**2
+                bird_y_t = bird_y_t + 1        
 
     # moving
     bird_y += bird_y_change
